@@ -41,3 +41,5 @@ pylayers.egg-info/
 
 # added by GitSavvy
 /pylayers/simul/link.py
+
+venv/
