@@ -37,12 +37,12 @@ for d in dirlist:
         for f in files:
             if not os.path.isdir(path+d+f) and ex in f:
                 rindic=True
-                print f
+                print(f)
                 os.remove(path+d+f)
 #                print path+d+f
 
         if rindic:
-            print 'removed *' + ex +' from ' +d +'\n'
+            print('removed *' + ex +' from ' +d +'\n')
             rindic=False
 
 
@@ -65,4 +65,4 @@ for line in lines:
     else :
         file.write(line)
 file.close()
-print 'removed [output] entries into ' +inifile +'\n'
+print('removed [output] entries into ' +inifile +'\n')
