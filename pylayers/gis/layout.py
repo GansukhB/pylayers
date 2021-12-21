@@ -53,12 +53,12 @@ from functools import partial
 
 if sys.version_info.major==2:
     from  urllib.request import urlopen
-    import configparser as ConfigParser
-    import configparser
+    #import configparser as ConfigParser
+    import configparser as configparser
 else:
     from  urllib.request import urlopen
-    import configparser as ConfigParser
-    import configparser
+    #import configparser as ConfigParser
+    import configparser as configparser
 # from cStringIO import StringIO
 # from multiprocessing import Pool
 

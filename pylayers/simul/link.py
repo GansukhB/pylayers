@@ -379,7 +379,7 @@ class DLink(Link):
             cindoor = [p for p in self.L.Gt.nodes() if self.L.Gt.nodes[p]['indoor']]
 
             if self._L.typ =='outdoor':
-                u = list(self.L.Gi.node.keys())
+                u = list(self.L.Gi.nodes.keys())
                 # lT : list of transmission interactions
                 lT  =  [k for k in u if (len(k)==3)]
                 # lTi : transmission connected at least to an indoor cycle
