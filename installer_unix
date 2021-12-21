@@ -23,5 +23,13 @@ pip install SimPy==2.2
 pip install scikit-commpy
 pip install simplekml
 pip install smopy
+pip install pandas
+pip install seaborn
+pip install shapely
+pip install networkx
+pip install mayavi
+pip install basemap-data
+pip install basemap-data-hires
+pip install h5py
 
 python setup.py install
