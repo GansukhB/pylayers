@@ -791,7 +791,10 @@ class Signatures(PyLayers,dict):
         try:
             # file management
             fh5=h5py.File(filename,'a')
+            print(fh5['sig'].keys())
+            print(grpname)
             if not grpname in list(fh5['sig'].keys()):
+                print(grpname)
                 fh5['sig'].create_group(grpname)
             else :
                 raise NameError('sig/'+grpname +'already exists in '+filenameh5)

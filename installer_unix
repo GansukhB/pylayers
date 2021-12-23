@@ -31,5 +31,7 @@ pip install mayavi
 pip install basemap-data
 pip install basemap-data-hires
 pip install h5py
+pip install simplejson
+pip install numba
 
 python setup.py install
