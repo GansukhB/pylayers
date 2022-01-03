@@ -791,6 +791,8 @@ class Signatures(PyLayers,dict):
         try:
             # file management
             fh5=h5py.File(filename,'a')
+            #fh5=h5py.File(filename,'w')
+            #print(filename)
             print(fh5['sig'].keys())
             print(grpname)
             if not grpname in list(fh5['sig'].keys()):
@@ -814,6 +816,7 @@ class Signatures(PyLayers,dict):
             fh5.close()
         except BaseException as e:
             fh5.close()
+            print("----------\n")
             print(e)
             raise NameError('Signature: issue when writting h5py file')
 

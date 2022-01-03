@@ -92,7 +92,7 @@ class Coverage(PyLayers):
         """
 
 
-        self.config = configparser.ConfigParser(allow_no_value=True)
+        self.config = ConfigParser.ConfigParser(allow_no_value=True)
         self.config.read(pyu.getlong(_fileini,pstruc['DIRSIMUL']))
 
         # section layout
