@@ -108,6 +108,7 @@ class Coverage(PyLayers):
 
         # get the Layout
         filename = self.layoutopt['filename']
+        ##print(filename)
         if filename.endswith('lay'):
             self.typ = 'indoor'
             self.L = Layout(filename)
@@ -593,276 +594,276 @@ class Coverage(PyLayers):
         self.best = True
 
 
-#    def showEd(self,polar='o',**kwargs):
-#        """ shows a map of direct path excess delay
-#
-#        Parameters
-#        ----------
-#
-#        polar : string
-#        'o' | 'p'
-#
-#        Examples
-#        --------
-#
-#        .. plot::
-#            :include-source:
-#
-#            >> from pylayers.antprop.coverage import *
-#            >> C = Coverage()
-#            >> C.cover()
-#            >> C.showEd(polar='o')
-#
-#        """
-#
-#        if not kwargs.has_key('alphacy'):
-#            kwargs['alphacy']=0.0
-#        if not kwargs.has_key('colorcy'):
-#            kwargs['colorcy']='w'
-#        if not kwargs.has_key('nodes'):
-#            kwargs['nodes']=False
-#
-#        fig,ax = self.L.showG('s',**kwargs)
-#        l = self.grid[0,0]
-#        r = self.grid[-1,0]
-#        b = self.grid[0,1]
-#        t = self.grid[-1,-1]
-#
-#        cdict = {
-#        'red'  :  ((0., 0.5, 0.5), (1., 1., 1.)),
-#        'green':  ((0., 0.5, 0.5), (1., 1., 1.)),
-#        'blue' :  ((0., 0.5, 0.5), (1., 1., 1.))
-#        }
-#        #generate the colormap with 1024 interpolated values
-#        my_cmap = m.colors.LinearSegmentedColormap('my_colormap', cdict, 1024)
-#
-#        if polar=='o':
-#            prdbm=self.prdbmo
-#        if polar=='p':
-#            prdbm=self.prdbmp
-#
-#
-#
-#        if polar=='o':
-#            mcEdof = np.ma.masked_where(prdbm < self.rxsens,self.Edo)
-#
-#            cov=ax.imshow(mcEdof.reshape((self.nx,self.ny)).T,
-#                             extent=(l,r,b,t),cmap = 'jet',
-#                             origin='lower')
-#
-#
-#
-#            # cov=ax.imshow(self.Edo.reshape((self.nx,self.ny)).T,
-#            #           extent=(l,r,b,t),
-#            #           origin='lower')
-#            titre = "Map of LOS excess delay, polar orthogonal"
-#
-#        if polar=='p':
-#            mcEdpf = np.ma.masked_where(prdbm < self.rxsens,self.Edp)
-#
-#            cov=ax.imshow(mcEdpf.reshape((self.nx,self.ny)).T,
-#                             extent=(l,r,b,t),cmap = 'jet',
-#                             origin='lower')
-#
-#            # cov=ax.imshow(self.Edp.reshape((self.nx,self.ny)).T,
-#            #           extent=(l,r,b,t),
-#            #           origin='lower')
-#            titre = "Map of LOS excess delay, polar parallel"
-#
-#        ax.scatter(self.tx[0],self.tx[1],linewidth=0)
-#        ax.set_title(titre)
-#
-#        divider = make_axes_locatable(ax)
-#        cax = divider.append_axes("right", size="5%", pad=0.05)
-#        clb = fig.colorbar(cov,cax)
-#        clb.set_label('excess delay (ns)')
-#
-#        if self.show:
-#            plt.show()
-#        return fig,ax
-#
-#    def showPower(self,rxsens=True,nfl=True,polar='o',**kwargs):
-#        """ show the map of received power
-#
-#        Parameters
-#        ----------
-#
-#        rxsens : bool
-#              clip the map with rx sensitivity set in self.rxsens
-#        nfl : bool
-#              clip the map with noise floor set in self.pndbm
-#        polar : string
-#            'o'|'p'
-#
-#        Examples
-#        --------
-#
-#        .. plot::
-#            :include-source:
-#
-#            > from pylayers.antprop.coverage import *
-#            > C = Coverage()
-#            > C.cover()
-#            > C.showPower()
-#
-#        """
-#
-#        if not kwargs.has_key('alphacy'):
-#            kwargs['alphacy']=0.0
-#        if not kwargs.has_key('colorcy'):
-#            kwargs['colorcy']='w'
-#        if not kwargs.has_key('nodes'):
-#            kwargs['nodes']=False
-#        fig,ax = self.L.showG('s',**kwargs)
-#
-#        l = self.grid[0,0]
-#        r = self.grid[-1,0]
-#        b = self.grid[0,1]
-#        t = self.grid[-1,-1]
-#
-#        if polar=='o':
-#            prdbm=self.prdbmo
-#        if polar=='p':
-#            prdbm=self.prdbmp
-#
-##        tCM = plt.cm.get_cmap('jet')
-##        tCM._init()
-##        alphas = np.abs(np.linspace(.0,1.0, tCM.N))
-##        tCM._lut[:-3,-1] = alphas
-#
-#        title='Map of received power - Pt = ' + str(self.ptdbm) + ' dBm'+str(' fGHz =') + str(self.fGHz) + ' polar = '+polar
-#
-#        cdict = {
-#        'red'  :  ((0., 0.5, 0.5), (1., 1., 1.)),
-#        'green':  ((0., 0.5, 0.5), (1., 1., 1.)),
-#        'blue' :  ((0., 0.5, 0.5), (1., 1., 1.))
-#        }
-#
-#        if not kwargs.has_key('cmap'):
-#        # generate the colormap with 1024 interpolated values
-#            cmap = m.colors.LinearSegmentedColormap('my_colormap', cdict, 1024)
-#        else:
-#            cmap = kwargs['cmap']
-#        #my_cmap = cm.copper
-#
-#
-#        if rxsens :
-#
-#            ## values between the rx sensitivity and noise floor
-#            mcPrf = np.ma.masked_where((prdbm > self.rxsens)
-#                                     & (prdbm < self.pndbm),prdbm)
-#            # mcPrf = np.ma.masked_where((prdbm > self.rxsens) ,prdbm)
-#
-#            cov1 = ax.imshow(mcPrf.reshape((self.nx,self.ny)).T,
-#                             extent=(l,r,b,t),cmap = cm.copper,
-#                             vmin=self.rxsens,origin='lower')
-#
-#            ### values above the sensitivity
-#            mcPrs = np.ma.masked_where(prdbm < self.rxsens,prdbm)
-#            cov = ax.imshow(mcPrs.reshape((self.nx,self.ny)).T,
-#                            extent=(l,r,b,t),
-#                            cmap = cmap,
-#                            vmin=self.rxsens,origin='lower')
-#            title=title + '\n black : Pr (dBm) < %.2f' % self.rxsens + ' dBm'
-#
-#        else :
-#            cov=ax.imshow(prdbm.reshape((self.nx,self.ny)).T,
-#                          extent=(l,r,b,t),
-#                          cmap = cmap,
-#                          vmin=self.pndbm,origin='lower')
-#
-#        if nfl:
-#            ### values under the noise floor
-#            ### we first clip the value below the noise floor
-#            cl = np.nonzero(prdbm<=self.pndbm)
-#            cPr = prdbm
-#            cPr[cl] = self.pndbm
-#            mcPruf = np.ma.masked_where(cPr > self.pndbm,cPr)
-#            cov2 = ax.imshow(mcPruf.reshape((self.nx,self.ny)).T,
-#                             extent=(l,r,b,t),cmap = 'binary',
-#                             vmax=self.pndbm,origin='lower')
-#            title=title + '\n white : Pr (dBm) < %.2f' % self.pndbm + ' dBm'
-#
-#
-#        ax.scatter(self.tx[0],self.tx[1],s=10,c='k',linewidth=0)
-#
-#        ax.set_title(title)
-#        divider = make_axes_locatable(ax)
-#        cax = divider.append_axes("right", size="5%", pad=0.05)
-#        clb = fig.colorbar(cov,cax)
-#        clb.set_label('Power (dBm)')
-#
-#        if self.show:
-#            plt.show()
-#
-#        return fig,ax
-#
-#
-#    def showTransistionRegion(self,polar='o'):
-#        """
-#
-#        Notes
-#        -----
-#
-#        See  : "Analyzing the Transitional Region in Low Power Wireless Links"
-#                Marco Zuniga and Bhaskar Krishnamachari
-#
-#        Examples
-#        --------
-#
-#        .. plot::
-#            :include-source:
-#
-#            > from pylayers.antprop.coverage import *
-#            > C = Coverage()
-#            > C.cover()
-#            > C.showTransitionRegion()
-#
-#        """
-#
-#        frameLength = self.framelengthbytes
-#
-#        PndBm = self.pndbm
-#        gammaU = 10*np.log10(-1.28*np.log(2*(1-0.9**(1./(8*frameLength)))))
-#        gammaL = 10*np.log10(-1.28*np.log(2*(1-0.1**(1./(8*frameLength)))))
-#
-#        PrU = PndBm + gammaU
-#        PrL = PndBm + gammaL
-#
-#        fig,ax = self.L.showGs()
-#
-#        l = self.grid[0,0]
-#        r = self.grid[-1,0]
-#        b = self.grid[0,1]
-#        t = self.grid[-1,-1]
-#
-#        if polar=='o':
-#            prdbm=self.prdbmo
-#        if polar=='p':
-#            prdbm=self.prdbmp
-#
-#        zones = np.zeros(np.shape(prdbm))
-#        #pdb.set_trace()
-#
-#        uconnected  = np.nonzero(prdbm>PrU)
-#        utransition = np.nonzero((prdbm < PrU)&(prdbm > PrL))
-#        udisconnected = np.nonzero(prdbm < PrL)
-#
-#        zones[uconnected] = 1
-#        zones[utransition] = (prdbm[utransition]-PrL)/(PrU-PrL)
-#        cov = ax.imshow(zones.reshape((self.nx,self.ny)).T,
-#                             extent=(l,r,b,t),cmap = 'BuGn',origin='lower')
-#
-#        title='PDR region'
-#        ax.scatter(self.tx[0],self.tx[1],linewidth=0)
-#
-#        ax.set_title(title)
-#        divider = make_axes_locatable(ax)
-#        cax = divider.append_axes("right", size="5%", pad=0.05)
-#        fig.colorbar(cov,cax)
-#        if self.show:
-#            plt.show()
-#
+    def showEd(self,polar='o',**kwargs):
+        """ shows a map of direct path excess delay
+
+        Parameters
+        ----------
+
+        polar : string
+        'o' | 'p'
+
+        Examples
+        --------
+
+        .. plot::
+            :include-source:
+
+            >> from pylayers.antprop.coverage import *
+            >> C = Coverage()
+            >> C.cover()
+            >> C.showEd(polar='o')
+
+        """
+
+        if not kwargs.__contains__('alphacy'):
+            kwargs['alphacy']=0.0
+        if not kwargs.__contains__('colorcy'):
+            kwargs['colorcy']='w'
+        if not kwargs.__contains__('nodes'):
+            kwargs['nodes']=False
+
+        fig,ax = self.L.showG('s',**kwargs)
+        l = self.grid[0,0]
+        r = self.grid[-1,0]
+        b = self.grid[0,1]
+        t = self.grid[-1,-1]
+
+        cdict = {
+        'red'  :  ((0., 0.5, 0.5), (1., 1., 1.)),
+        'green':  ((0., 0.5, 0.5), (1., 1., 1.)),
+        'blue' :  ((0., 0.5, 0.5), (1., 1., 1.))
+        }
+        #generate the colormap with 1024 interpolated values
+        my_cmap = m.colors.LinearSegmentedColormap('my_colormap', cdict, 1024)
+
+        if polar=='o':
+            prdbm=self.prdbmo
+        if polar=='p':
+            prdbm=self.prdbmp
+
+
+
+        if polar=='o':
+            mcEdof = np.ma.masked_where(prdbm < self.rxsens,self.Edo)
+
+            cov=ax.imshow(mcEdof.reshape((self.nx,self.ny)).T,
+                                extent=(l,r,b,t),cmap = 'jet',
+                                origin='lower')
+
+
+
+            # cov=ax.imshow(self.Edo.reshape((self.nx,self.ny)).T,
+            #           extent=(l,r,b,t),
+            #           origin='lower')
+            titre = "Map of LOS excess delay, polar orthogonal"
+
+        if polar=='p':
+            mcEdpf = np.ma.masked_where(prdbm < self.rxsens,self.Edp)
+
+            cov=ax.imshow(mcEdpf.reshape((self.nx,self.ny)).T,
+                                extent=(l,r,b,t),cmap = 'jet',
+                                origin='lower')
+
+            # cov=ax.imshow(self.Edp.reshape((self.nx,self.ny)).T,
+            #           extent=(l,r,b,t),
+            #           origin='lower')
+            titre = "Map of LOS excess delay, polar parallel"
+
+        ax.scatter(self.tx[0],self.tx[1],linewidth=0)
+        ax.set_title(titre)
+
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        clb = fig.colorbar(cov,cax)
+        clb.set_label('excess delay (ns)')
+
+        if self.show:
+            plt.show()
+        return fig,ax
+#
+    def showPower(self,rxsens=True,nfl=True,polar='o',**kwargs):
+        """ show the map of received power
+
+        Parameters
+        ----------
+
+        rxsens : bool
+                clip the map with rx sensitivity set in self.rxsens
+        nfl : bool
+                clip the map with noise floor set in self.pndbm
+        polar : string
+            'o'|'p'
+
+        Examples
+        --------
+
+        .. plot::
+            :include-source:
+
+            > from pylayers.antprop.coverage import *
+            > C = Coverage()
+            > C.cover()
+            > C.showPower()
+
+        """
+
+        if not kwargs.__contains__('alphacy'):
+            kwargs['alphacy']=0.0
+        if not kwargs.__contains__('colorcy'):
+            kwargs['colorcy']='w'
+        if not kwargs.__contains__('nodes'):
+            kwargs['nodes']=False
+        fig,ax = self.L.showG('s',**kwargs)
+
+        l = self.grid[0,0]
+        r = self.grid[-1,0]
+        b = self.grid[0,1]
+        t = self.grid[-1,-1]
+
+        if polar=='o':
+            prdbm=self.prdbmo
+        if polar=='p':
+            prdbm=self.prdbmp
+
+    #        tCM = plt.cm.get_cmap('jet')
+    #        tCM._init()
+    #        alphas = np.abs(np.linspace(.0,1.0, tCM.N))
+    #        tCM._lut[:-3,-1] = alphas
+
+        title='Map of received power - Pt = ' + str(self.ptdbm) + ' dBm'+str(' fGHz =') + str(self.fGHz) + ' polar = '+polar
+
+        cdict = {
+        'red'  :  ((0., 0.5, 0.5), (1., 1., 1.)),
+        'green':  ((0., 0.5, 0.5), (1., 1., 1.)),
+        'blue' :  ((0., 0.5, 0.5), (1., 1., 1.))
+        }
+
+        if not kwargs.__contains__('cmap'):
+        # generate the colormap with 1024 interpolated values
+            cmap = m.colors.LinearSegmentedColormap('my_colormap', cdict, 1024)
+        else:
+            cmap = kwargs['cmap']
+        #my_cmap = cm.copper
+
+
+        if rxsens :
+
+            ## values between the rx sensitivity and noise floor
+            mcPrf = np.ma.masked_where((prdbm > self.rxsens)
+                                        & (prdbm < self.pndbm),prdbm)
+            # mcPrf = np.ma.masked_where((prdbm > self.rxsens) ,prdbm)
+
+            cov1 = ax.imshow(mcPrf.reshape((self.nx,self.ny)).T,
+                                extent=(l,r,b,t),cmap = cm.copper,
+                                vmin=self.rxsens,origin='lower')
+
+            ### values above the sensitivity
+            mcPrs = np.ma.masked_where(prdbm < self.rxsens,prdbm)
+            cov = ax.imshow(mcPrs.reshape((self.nx,self.ny)).T,
+                            extent=(l,r,b,t),
+                            cmap = cmap,
+                            vmin=self.rxsens,origin='lower')
+            title=title + '\n black : Pr (dBm) < %.2f' % self.rxsens + ' dBm'
+
+        else :
+            cov=ax.imshow(prdbm.reshape((self.nx,self.ny)).T,
+                            extent=(l,r,b,t),
+                            cmap = cmap,
+                            vmin=self.pndbm,origin='lower')
+
+        if nfl:
+            ### values under the noise floor
+            ### we first clip the value below the noise floor
+            cl = np.nonzero(prdbm<=self.pndbm)
+            cPr = prdbm
+            cPr[cl] = self.pndbm
+            mcPruf = np.ma.masked_where(cPr > self.pndbm,cPr)
+            cov2 = ax.imshow(mcPruf.reshape((self.nx,self.ny)).T,
+                                extent=(l,r,b,t),cmap = 'binary',
+                                vmax=self.pndbm,origin='lower')
+            title=title + '\n white : Pr (dBm) < %.2f' % self.pndbm + ' dBm'
+
+
+        ax.scatter(self.tx[0],self.tx[1],s=10,c='k',linewidth=0)
+
+        ax.set_title(title)
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        clb = fig.colorbar(cov,cax)
+        clb.set_label('Power (dBm)')
+
+        if self.show:
+            plt.show()
+
+        return fig,ax
+
+
+    def showTransistionRegion(self,polar='o'):
+        """
+
+        Notes
+        -----
+
+        See  : "Analyzing the Transitional Region in Low Power Wireless Links"
+                Marco Zuniga and Bhaskar Krishnamachari
+
+        Examples
+        --------
+
+        .. plot::
+            :include-source:
+
+            > from pylayers.antprop.coverage import *
+            > C = Coverage()
+            > C.cover()
+            > C.showTransitionRegion()
+
+        """
+
+        frameLength = self.framelengthbytes
+
+        PndBm = self.pndbm
+        gammaU = 10*np.log10(-1.28*np.log(2*(1-0.9**(1./(8*frameLength)))))
+        gammaL = 10*np.log10(-1.28*np.log(2*(1-0.1**(1./(8*frameLength)))))
+
+        PrU = PndBm + gammaU
+        PrL = PndBm + gammaL
+
+        fig,ax = self.L.showGs()
+
+        l = self.grid[0,0]
+        r = self.grid[-1,0]
+        b = self.grid[0,1]
+        t = self.grid[-1,-1]
+
+        if polar=='o':
+            prdbm=self.prdbmo
+        if polar=='p':
+            prdbm=self.prdbmp
+
+        zones = np.zeros(np.shape(prdbm))
+        #pdb.set_trace()
+
+        uconnected  = np.nonzero(prdbm>PrU)
+        utransition = np.nonzero((prdbm < PrU)&(prdbm > PrL))
+        udisconnected = np.nonzero(prdbm < PrL)
+
+        zones[uconnected] = 1
+        zones[utransition] = (prdbm[utransition]-PrL)/(PrU-PrL)
+        cov = ax.imshow(zones.reshape((self.nx,self.ny)).T,
+                                extent=(l,r,b,t),cmap = 'BuGn',origin='lower')
+
+        title='PDR region'
+        ax.scatter(self.tx[0],self.tx[1],linewidth=0)
+
+        ax.set_title(title)
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        fig.colorbar(cov,cax)
+        if self.show:
+            plt.show()
+
     def plot(self,**kwargs):
         """
         """

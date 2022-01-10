@@ -2122,7 +2122,7 @@ class Layout(pro.PyLayers):
             fileout = self._filename
 
         filelay = pyu.getlong(fileout, pro.pstruc['DIRLAY'])
-        print(filelay)
+        #print(filelay)
         fd = open(filelay, "w")
         config.write(fd)
         fd.close()
@@ -2213,8 +2213,9 @@ class Layout(pro.PyLayers):
         #   zfloor
         #
         if self.typ == 'indoor':
-            self.zceil = eval(di['indoor']['zceil'])
-            self.zfloor = eval(di['indoor']['zfloor'])
+            #print(di)
+            self.zceil = eval(di['indoor']['ceil'])
+            self.zfloor = eval(di['indoor']['floor'])
 
         # old format
         if self.typ == 'floorplan':

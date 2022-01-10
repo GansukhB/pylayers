@@ -316,9 +316,9 @@ class Ezone(PyLayers):
 
         """
         self.prefix = prefix
-        print("====\n")
-        print(self.prefix)
-        print("====\n")
+        #print("====\n")
+        #print(self.prefix)
+        #print("====\n")
 
         (lom,loM,lam,laM) = dectile(self.prefix)
 
