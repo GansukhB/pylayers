@@ -89,6 +89,7 @@ def dectile(prefix='N48W002'):
     (-2.0, -1.0, 48,49)
 
     """
+    print(prefix)
     if prefix[0] == 'N':
         latmin = int(prefix[1:3])
         latmax = latmin+1
@@ -112,6 +113,10 @@ def dectile(prefix='N48W002'):
             lonmin = int(st)
 
         lonmax = lonmin+1
+    print("-------\n")
+    print(prefix)
+    print("-------\n")
+    print(lonmin, lonmax, latmin, latmax)
     return (lonmin, lonmax, latmin, latmax)
 
 

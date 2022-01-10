@@ -145,6 +145,8 @@ class Coverage(PyLayers):
 
         else:
             self.typ='outdoor'
+            print("--------\n")
+            print(filename)
             self.E = ez.Ezone(filename)
             self.E.loadh5()
             self.E.rebase()

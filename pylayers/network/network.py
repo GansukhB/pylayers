@@ -51,7 +51,7 @@ import numpy as np
 import scipy as sp
 import networkx as nx
 import itertools
-import pickle as pk
+import pickle5 as pk
 import pkgutil
 from copy import deepcopy
 import matplotlib.pyplot as plt

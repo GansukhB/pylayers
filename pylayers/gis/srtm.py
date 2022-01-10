@@ -26,7 +26,7 @@ else:
     from urllib.request import urlopen
     _PY3=True
 import re
-import pickle
+import pickle5 as pickle
 import os.path
 import os
 import zipfile

@@ -10,7 +10,7 @@ import pylayers.signal.bsignal as bs
 from datetime import datetime
 import time
 import pdb
-import pickle
+import pickle5 as pickle
 import numpy as np
 import pylayers.signal.waveform as wvf
 #import matplotlib.pyplot as plt

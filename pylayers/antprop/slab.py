@@ -5,7 +5,7 @@ import os
 import sys
 import string
 if sys.version_info.major==2:
-    import pickle
+    import pickle5 as pickle
     import configparser as configparser
 else:
     import _pickle as cPickle

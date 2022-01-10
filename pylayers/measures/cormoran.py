@@ -40,7 +40,7 @@ from skimage import img_as_ubyte
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-import pickle
+import pickle5 as pickle
 try:
     from tvtk.api import tvtk
     from mayavi.sources.vtk_data_source import VTKDataSource

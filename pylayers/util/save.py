@@ -19,7 +19,7 @@ from pylayers.gis.layout import Layout
 import copy
 
 
-import pickle
+import pickle5 as pickle
 import pdb
 import os
 
